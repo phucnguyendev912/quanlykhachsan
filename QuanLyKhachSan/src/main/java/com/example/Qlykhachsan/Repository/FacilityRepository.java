@@ -7,5 +7,5 @@ import com.example.Qlykhachsan.Model.Facility;
 
 @Repository
 public interface FacilityRepository extends JpaRepository<Facility, Integer> {
-
+	
 }

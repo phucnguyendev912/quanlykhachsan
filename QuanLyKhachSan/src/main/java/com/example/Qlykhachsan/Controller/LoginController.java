@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.Qlykhachsan.Dto.LoginRequest;
 import com.example.Qlykhachsan.Model.Account;
+import com.example.Qlykhachsan.Model.User;
 import com.example.Qlykhachsan.Service.AuthService;
 
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +31,8 @@ public class LoginController {
 		Account account = authService.login(request);
 		if (account != null) {
 			// dang nhap thanh cong
+			User userId = account.getUser();
+			session.setAttribute("userId", userId);
 			session.setAttribute("currentUser", account);
 			String rolename = account.getRole().getRoleName();
 			if (rolename.equalsIgnoreCase("admin")) {

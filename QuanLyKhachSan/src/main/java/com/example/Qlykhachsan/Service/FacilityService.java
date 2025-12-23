@@ -1,5 +1,7 @@
 package com.example.Qlykhachsan.Service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +21,10 @@ public class FacilityService {
 		int pagesize = 8;
 		Pageable page = PageRequest.of(pageIndex, pagesize);
 		return facilityRepository.findAll(page);
+	}
+
+	public Facility getFacilityById(Integer facilityId) {
+		return facilityRepository.findById(facilityId).orElse(null);
 	}
 
 }

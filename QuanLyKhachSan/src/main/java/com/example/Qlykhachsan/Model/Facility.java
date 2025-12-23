@@ -23,7 +23,7 @@ public class Facility {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Service_id", nullable = false)
-	private int serviceId;
+	private int facilityId;
 	@Column(name = "Service_name", nullable = true)
 	private String serviceName;
 	@Column(name = "Service_price")

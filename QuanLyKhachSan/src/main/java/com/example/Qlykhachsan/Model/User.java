@@ -18,11 +18,13 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_id", nullable = false) 
-	private Integer userId; 
+	@Column(name = "user_id", nullable = false)
+	private Integer userId;
+	@OneToOne(mappedBy = "user")
+	private Clients client;
 
 	@Column(name = "fullname", length = 250, nullable = false)
-	private String fullname; 
+	private String fullname;
 
 	@Column(name = "dob", nullable = false)
 	private Date dob;
@@ -40,4 +42,5 @@ public class User {
 	private String status;
 	@Column(name = "email", length = 50)
 	private String email;
+
 }

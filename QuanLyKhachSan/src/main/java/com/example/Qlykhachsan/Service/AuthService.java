@@ -36,10 +36,10 @@ public class AuthService {
 		}
 		// 2 tạo user(lưu thông tin cá nhân trước để lấy id)
 		User users = new User();
-		users.setFullname(request.getFullName());
+		users.setFullname(request.getFullname());
 		users.setDob(request.getDob());
 		users.setSex(request.getSex());
-		users.setPhoneNumber(request.getPhonenumber());
+		users.setPhoneNumber(request.getPhoneNumber());
 		users.setAddress(request.getAddress());
 		users.setEmail(request.getEmail());
 		users.setStatus("Active");

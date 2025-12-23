@@ -20,7 +20,7 @@ public class RegisterController {
 		model.addAttribute("registerRequest", new RegisterRequest());
 		return "Register";
 	}
-
+ 
 	@PostMapping("/register")
 	public String registerSubmit(@ModelAttribute("registerRequest") RegisterRequest request, Model model) {
 

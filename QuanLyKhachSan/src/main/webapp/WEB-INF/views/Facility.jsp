@@ -15,11 +15,11 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
+/* CSS giữ nguyên như cũ */
 .text-center {
 	padding: 20px;
 }
 
-/* Card Dịch vụ */
 .service-card {
 	background: #fff;
 	border-radius: 12px;
@@ -28,7 +28,7 @@
 	transition: all 0.3s ease;
 	margin-bottom: 30px;
 	border: 1px solid #e0e0e0;
-	height: 100%; /* Giúp các card bằng nhau */
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 }
@@ -38,10 +38,9 @@
 	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* Hình ảnh */
 .service-card img {
 	width: 100%;
-	height: 220px; /* Tăng chiều cao ảnh chút cho đẹp */
+	height: 220px;
 	object-fit: cover;
 	transition: transform 0.3s ease;
 }
@@ -50,7 +49,6 @@
 	transform: scale(1.05);
 }
 
-/* Thông tin dịch vụ */
 .service-info {
 	padding: 20px 15px;
 	background: linear-gradient(to bottom, #f8f9fa, #ffffff);
@@ -66,7 +64,6 @@
 	display: block;
 	margin-bottom: 8px;
 	font-weight: 700;
-	/* Giới hạn 2 dòng cho tiêu đề */
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
@@ -86,27 +83,23 @@
 	color: #666;
 	margin-bottom: 10px;
 	font-style: italic;
-	/* Giới hạn 1 dòng */
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
-/* Giá - TO VÀ NỔI BẬT */
 .price-tag {
 	display: block;
 	font-size: 20px;
 	font-weight: 700;
-	color: #d4af37; /* Màu vàng kim loại cho sang trọng kiểu Spa */
+	color: #d4af37;
 	margin: 10px 0;
 }
 
-/* Button đặt */
 .btn-book {
 	width: 100%;
 	padding: 10px 20px;
 	background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-	/* Màu xanh lá Spa */
 	color: white;
 	border: none;
 	border-radius: 8px;
@@ -127,14 +120,13 @@
 <body>
 	<jsp:include page="Header.jsp" />
 	<fmt:setLocale value="vi_VN" />
+
 	<div class="container py-5">
 		<div class="text-center mb-5">
 			<h2 class="fw-bold text-primary">DỊCH VỤ</h2>
 			<p class="text-muted">Trải nghiệm những dịch vụ đẳng cấp tại
 				khách sạn của chúng tôi</p>
 		</div>
-
-
 
 		<div class="row">
 			<c:forEach items="${dsFacility}" var="s">
@@ -148,7 +140,6 @@
 
 						<div class="p-3 text-center d-flex flex-column h-100">
 							<h5 class="fw-bold text-primary">${s.serviceName}</h5>
-
 							<p class="text-muted small text-truncate">${s.description}</p>
 
 							<div class="mt-auto">
@@ -159,14 +150,14 @@
 								<button type="button"
 									class="btn btn-outline-primary w-100 rounded-pill"
 									data-bs-toggle="modal"
-									data-bs-target="#modalService${s.serviceId}">Xem chi
+									data-bs-target="#modalService${s.facilityId}">Xem chi
 									tiết & Đặt</button>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="modal fade" id="modalService${s.serviceId}"
+				<div class="modal fade" id="modalService${s.facilityId}"
 					tabindex="-1" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered">
 						<div class="modal-content">
@@ -199,7 +190,8 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-bs-dismiss="modal">Đóng</button>
-								<a href="/book-service?id=${s.serviceId}"
+
+								<a href="/bookingService?id=${s.facilityId}"
 									class="btn btn-primary"> <i class="fa-solid fa-cart-plus"></i>
 									Đặt Dịch Vụ Này
 								</a>
@@ -214,17 +206,17 @@
 			<nav aria-label="Page navigation" class="mt-5">
 				<ul class="pagination justify-content-center">
 					<li class="page-item ${page == 1 ? 'disabled' : ''}"><a
-						class="page-link" href="/facilitys?page=${currentPage - 1}"
+						class="page-link" href="/facilitys?page=${page - 1}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 					</a></li>
 
 					<c:forEach begin="1" end="${sotrang}" var="i">
-						<li class="page-item ${i == currentPage ? 'active' : ''}"><a
+						<li class="page-item ${i == page ? 'active' : ''}"><a
 							class="page-link" href="/facilitys?page=${i}">${i}</a></li>
 					</c:forEach>
 
 					<li class="page-item ${page == sotrang ? 'disabled' : ''}"><a
-						class="page-link" href="/facilitys?page=${currentPage + 1}"
+						class="page-link" href="/facilitys?page=${page + 1}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</ul>

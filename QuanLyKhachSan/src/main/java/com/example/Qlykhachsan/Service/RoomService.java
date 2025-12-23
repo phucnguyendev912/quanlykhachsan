@@ -34,4 +34,8 @@ public class RoomService {
 		Optional<Rooms> listRoom = roomRepository.findById(roomId);
 		return listRoom.orElse(null);
 	}
+
+	public Rooms save(Rooms roomid) {
+		return roomRepository.save(roomid);
+	}
 }
