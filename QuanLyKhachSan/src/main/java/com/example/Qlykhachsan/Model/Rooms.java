@@ -34,8 +34,6 @@ public class Rooms {
 	private double priceRoom;
 	@Column(name = "number_of_client", nullable = true)
 	private int numberOfclient;
-	@Column(name = "date_apply", nullable = true)
-	private Date dateApply;
 	@Column(name = "image", nullable = true, length = 250)
 	private String image;
 	@Column(name = "acreage", nullable = true)

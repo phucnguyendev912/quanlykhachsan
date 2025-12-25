@@ -15,7 +15,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-/* Card phòng - Gọn gàng hơn */
+/* Giữ nguyên CSS đẹp của bạn */
 .rooms-card {
 	background: #fff;
 	border-radius: 15px;
@@ -24,7 +24,7 @@
 	transition: all 0.3s ease;
 	border: none;
 	height: 100%;
-	display: flex; /* Thêm flex để canh đều chiều cao */
+	display: flex;
 	flex-direction: column;
 }
 
@@ -33,12 +33,11 @@
 	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Ảnh */
 .card-img-wrapper {
 	position: relative;
 	overflow: hidden;
 	height: 220px;
-	flex-shrink: 0; /* Không co ảnh lại */
+	flex-shrink: 0;
 }
 
 .card-img-wrapper img {
@@ -52,7 +51,6 @@
 	transform: scale(1.1);
 }
 
-/* Badge trạng thái */
 .status-badge {
 	position: absolute;
 	top: 15px;
@@ -73,19 +71,17 @@
 	background-color: #e74c3c;
 }
 
-/* Thông tin phòng */
 .rooms-info {
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
-	flex-grow: 1; /* Để phần này chiếm hết khoảng trống còn lại */
+	flex-grow: 1;
 }
 
 .room-type {
 	font-size: 18px;
 	font-weight: 700;
 	color: #2c3e50;
-	/* Tăng khoảng cách dưới vì đã bỏ dòng meta */
 	margin-bottom: 15px;
 	display: block;
 	text-decoration: none;
@@ -95,17 +91,14 @@
 	color: #667eea;
 }
 
-/* ĐÃ XÓA CLASS .room-meta VÌ KHÔNG DÙNG NỮA */
 .price-tag {
 	font-size: 20px;
 	font-weight: 800;
 	color: #e74c3c;
-	margin-bottom: 20px; /* Tăng khoảng cách chút cho thoáng */
+	margin-bottom: 20px;
 	margin-top: auto;
-	/* Đẩy giá tiền xuống sát nút bấm nếu tên phòng ngắn */
 }
 
-/* Khu vực nút bấm */
 .action-buttons {
 	display: flex;
 	gap: 10px;
@@ -170,19 +163,32 @@
 	<fmt:setLocale value="vi_VN" />
 
 	<div class="container mt-5 mb-5">
+
 		<div class="text-center mb-5">
-			<h2 class="text-primary fw-bold">KHÁM PHÁ PHÒNG NGHỈ</h2>
-			<p class="text-muted">Chọn không gian nghỉ dưỡng hoàn hảo cho bạn</p>
+			<c:if test="${not empty keyword}">
+				<h2 class="text-primary fw-bold">KẾT QUẢ TÌM KIẾM</h2>
+				<p class="text-muted">Từ khóa: "${keyword}"</p>
+			</c:if>
+			<c:if test="${empty keyword}">
+				<h2 class="text-primary fw-bold">KHÁM PHÁ PHÒNG NGHỈ</h2>
+				<p class="text-muted">Chọn không gian nghỉ dưỡng hoàn hảo cho
+					bạn</p>
+			</c:if>
 		</div>
 
+		<c:set var="roomsToShow"
+			value="${not empty keyword ? listRooms : dsRooms}" />
+
 		<div class="row g-4">
-			<c:forEach items="${dsRooms}" var="room">
+
+			<c:forEach items="${roomsToShow}" var="room">
 				<div class="col-md-3 col-sm-6 d-flex align-items-stretch">
 					<div class="rooms-card w-100">
 
 						<div class="card-img-wrapper">
 							<a href="/room-detail?id=${room.roomId}"> <img
-								src="${room.image}">
+								src="${room.image}"
+								onerror="this.src='https://via.placeholder.com/300x200?text=Room'">
 							</a> <span
 								class="status-badge ${room.statusroom == 'Trống' ? 'trong' : 'full'}">
 								${room.statusroom == 'Trống' ? 'Còn Trống' : 'Hết Phòng'} </span>
@@ -204,7 +210,7 @@
 									Chi tiết </a>
 
 								<c:if test="${room.statusroom == 'Trống'}">
-									<a href="/confirm-booking/${room.roomId}" class="btn-book">
+									<a href="/booking-details/${room.roomId}" class="btn-book">
 										Đặt ngay </a>
 								</c:if>
 
@@ -216,22 +222,42 @@
 					</div>
 				</div>
 			</c:forEach>
+
+			<c:if test="${not empty keyword and empty listRooms}">
+				<div class="container text-center mt-5 mb-5">
+					<img
+						src="https://cdni.iconscout.com/illustration/premium/thumb/search-result-not-found-2130361-1800925.png"
+						width="200" alt="Not found" class="mb-3">
+
+					<h4 class="text-muted">Rất tiếc, không tìm thấy kết quả cho
+						"${keyword}"</h4>
+					<p class="text-muted">Hãy thử tìm kiếm với từ khóa khác như:
+						Vip, Đơn, Đôi...</p>
+
+					<a href="/rooms" class="btn btn-primary mt-3 px-4 rounded-pill">
+						<i class="fa-solid fa-rotate-right"></i> Xem tất cả phòng
+					</a>
+				</div>
+			</c:if>
+
 		</div>
 
-		<nav aria-label="Page navigation">
-			<ul class="pagination justify-content-center mt-5">
-				<li class="page-item ${page == 1 ? 'disabled' : ''}"><a
-					class="page-link" href="/rooms?page=${page - 1}">&laquo;</a></li>
+		<c:if test="${empty keyword}">
+			<nav aria-label="Page navigation">
+				<ul class="pagination justify-content-center mt-5">
+					<li class="page-item ${page == 1 ? 'disabled' : ''}"><a
+						class="page-link" href="/rooms?page=${page - 1}">&laquo;</a></li>
 
-				<c:forEach begin="1" end="${sotrang}" var="i">
-					<li class="page-item ${i == page ? 'active' : ''}"><a
-						class="page-link" href="/rooms?page=${i}">${i}</a></li>
-				</c:forEach>
+					<c:forEach begin="1" end="${sotrang}" var="i">
+						<li class="page-item ${i == page ? 'active' : ''}"><a
+							class="page-link" href="/rooms?page=${i}">${i}</a></li>
+					</c:forEach>
 
-				<li class="page-item ${page == sotrang ? 'disabled' : ''}"><a
-					class="page-link" href="/rooms?page=${page + 1}">&raquo;</a></li>
-			</ul>
-		</nav>
+					<li class="page-item ${page == sotrang ? 'disabled' : ''}"><a
+						class="page-link" href="/rooms?page=${page + 1}">&raquo;</a></li>
+				</ul>
+			</nav>
+		</c:if>
 	</div>
 
 	<script

@@ -1,5 +1,7 @@
 package com.example.Qlykhachsan.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ public class RoomService {
 		int pagesize = 8;
 		// lay bao nhieu trang va bao nhieu dong
 		// tuong tu lenh limit va offset
-		Pageable pageable = PageRequest.of(pageNumber - 1, pagesize, Sort.by("sortOrder").ascending());
+		Pageable pageable = PageRequest.of(pageindex, pagesize, Sort.by("sortOrder").ascending());
 		return roomRepository.findBystatusroom(statusroom, pageable);
 
 	}
@@ -37,5 +39,23 @@ public class RoomService {
 
 	public Rooms save(Rooms roomid) {
 		return roomRepository.save(roomid);
+	}
+
+	public List<Rooms> getRelatedRooms(int currentRoomId) {
+		Rooms currentRoom = getRoomById(currentRoomId);
+		if (currentRoom == null) {
+			return new ArrayList<>();
+		}
+		double price = currentRoom.getPriceRoom();
+		double minprice = price * 0.8;
+		double maxprice = price * 1.2;
+		return roomRepository.findRelatedRooms(minprice, maxprice, currentRoomId);
+	}
+
+	public List<Rooms> searchRoom(String keyword) {
+		if (keyword != null) {
+			return roomRepository.searchRooms(keyword);
+		}
+		return roomRepository.findAll(); // Nếu không tìm gì thì trả về tất cả
 	}
 }

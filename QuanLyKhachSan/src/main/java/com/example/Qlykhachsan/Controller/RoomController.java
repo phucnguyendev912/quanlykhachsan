@@ -1,5 +1,7 @@
 package com.example.Qlykhachsan.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -36,20 +38,33 @@ public class RoomController {
 
 	@GetMapping("/room-detail")
 	public String viewRoomDetail(@RequestParam("id") Integer id, Model model, HttpSession session) {
-		
-		// 1. Gọi Service lấy thông tin phòng
-		Rooms room = roomService.getRoomById(id);
 
-		// 2. Kiểm tra nếu khách gõ ID lung tung không tồn tại
+		Rooms room = roomService.getRoomById(id);
 		if (room == null) {
-			// Đẩy về lại trang danh sách phòng
+
 			return "redirect:/rooms";
 		}
 
 		// 3. Gửi object phòng sang bên JSP
 		model.addAttribute("room", room);
-
+		List<Rooms> relatedRooms = roomService.getRelatedRooms(id);
+		model.addAttribute("relatedRooms", relatedRooms);
 		// 4. Trả về tên file JSP (Bạn nhớ đặt tên file JSP là room-detail.jsp nhé)
 		return "roomdetail";
+	}
+
+	@GetMapping("/search")
+	public String searchRoom(@RequestParam("keyword") String keyword, Model model) {
+		// 1. Gọi service tìm kiếm
+		List<Rooms> listRooms = roomService.searchRoom(keyword);
+
+		// 2. Đẩy kết quả ra giao diện
+		model.addAttribute("listRooms", listRooms);
+
+		// 3. Giữ lại từ khóa để hiện lại trên ô tìm kiếm
+		model.addAttribute("keyword", keyword);
+
+		// 4. Trả về lại trang danh sách phòng
+		return "rooms";
 	}
 }

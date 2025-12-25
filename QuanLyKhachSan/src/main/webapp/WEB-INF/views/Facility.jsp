@@ -193,7 +193,7 @@
 
 								<a href="/bookingService?id=${s.facilityId}"
 									class="btn btn-primary"> <i class="fa-solid fa-cart-plus"></i>
-									Đặt Dịch Vụ Này
+									Đặt Dịch Vụ
 								</a>
 							</div>
 						</div>

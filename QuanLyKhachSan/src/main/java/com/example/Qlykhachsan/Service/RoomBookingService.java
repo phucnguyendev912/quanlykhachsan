@@ -7,6 +7,7 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.Qlykhachsan.Config.VNPAYConfig;
 import com.example.Qlykhachsan.Model.RoomBooking;
@@ -16,6 +17,7 @@ import com.example.Qlykhachsan.util.VNPayUtil;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Service
+@Transactional
 public class RoomBookingService {
 	@Autowired
 	private RoomBookingRepository roomInfoRepository;

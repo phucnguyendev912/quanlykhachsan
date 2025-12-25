@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+body {
+	background-color: #f4f7f6;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.booking-container {
+	max-width: 900px;
+	margin: 50px auto;
+}
+
+.card {
+	border: none;
+	border-radius: 15px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+}
+
+.room-summary {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	padding: 40px;
+}
+
+.img img {
+	width: 100%; /* Đảm bảo responsive */
+	max-width: 280px;
+	/* QUAN TRỌNG: Giới hạn chiều rộng tối đa (chỉnh số này nếu muốn to/nhỏ hơn) */
+	height: 120px; /* Chiều cao cố định để ảnh đều nhau */
+	object-fit: cover; /* Cắt ảnh gọn gàng, không bị méo/bẹt */
+	display: block; /* Để căn giữa được */
+	margin: 0 auto 15px auto;
+	/* Căn giữa ảnh và tạo khoảng cách 15px bên dưới */
+	border: 2px solid #fff; /* Viền trắng mỏng cho nổi bật (tuỳ chọn) */
+}
+
+.payment-method {
+	border: 2px solid #eee;
+	border-radius: 10px;
+	padding: 15px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.payment-method:hover {
+	border-color: #667eea;
+	background: #f8f9ff;
+}
+
+.total-price-box {
+	background: #fff3f3;
+	border: 1px dashed #e74c3c;
+	border-radius: 10px;
+	padding: 20px;
+}

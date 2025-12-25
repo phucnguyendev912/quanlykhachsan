@@ -15,50 +15,7 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<style>
-body {
-	background-color: #f4f7f6;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.booking-container {
-	max-width: 900px;
-	margin: 50px auto;
-}
-
-.card {
-	border: none;
-	border-radius: 15px;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-	overflow: hidden;
-}
-
-.room-summary {
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	color: white;
-	padding: 40px;
-}
-
-.payment-method {
-	border: 2px solid #eee;
-	border-radius: 10px;
-	padding: 15px;
-	cursor: pointer;
-	transition: 0.3s;
-}
-
-.payment-method:hover {
-	border-color: #667eea;
-	background: #f8f9ff;
-}
-
-.total-price-box {
-	background: #fff3f3;
-	border: 1px dashed #e74c3c;
-	border-radius: 10px;
-	padding: 20px;
-}
-</style>
+<link href="/css/Booking.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="Header.jsp" />
@@ -70,17 +27,9 @@ body {
 					class="col-md-4 room-summary d-flex flex-column justify-content-center">
 					<h3 class="fw-bold mb-4">Thông tin phòng</h3>
 
-					<c:choose>
-						<c:when test="${not empty room.image}">
-							<img src="/${room.image}"
-								class="img-fluid rounded mb-3 shadow-sm" alt="Hình ảnh phòng">
-						</c:when>
-						<c:otherwise>
-							<img src="https://via.placeholder.com/300x200?text=No+Image"
-								class="img-fluid rounded mb-3" alt="No Image">
-						</c:otherwise>
-					</c:choose>
 
+
+					<img src="/${room.image}" class="img" alt="Hình ảnh phòng">
 					<h5 class="mb-2 fw-bold text-uppercase">${room.typeRoom}</h5>
 					<p class="mb-1">
 						<i class="fa-solid fa-door-open me-2"></i>Số phòng: <strong>${room.roomNumber}</strong>
@@ -132,6 +81,38 @@ body {
 							</small>
 						</div>
 
+						<c:if test="${not empty sessionScope.currentUser}">
+							<div class="card p-3 mb-3 bg-light border-warning">
+								<div class="d-flex justify-content-between align-items-center">
+									<div>
+										<h6 class="fw-bold text-warning mb-1">
+											<i class="fa-solid fa-coins"></i> Điểm tích lũy của bạn
+										</h6>
+										<small>Bạn đang có: <strong id="userPoints"
+											data-points="${sessionScope.currentUser.user.client.point}">
+												<fmt:formatNumber
+													value="${sessionScope.currentUser.user.client.point}"
+													type="number" />
+										</strong> điểm
+										</small>
+									</div>
+
+									<div class="form-check form-switch">
+										<input class="form-check-input" type="checkbox" id="usePoint"
+											name="usePoint" value="true"> <label
+											class="form-check-label fw-bold" for="usePoint"> Dùng
+											điểm giảm giá </label>
+									</div>
+								</div>
+
+								<div id="discountInfo" class="mt-2 text-success"
+									style="display: none;">
+									<i class="fa-solid fa-check"></i> Sẽ trừ <strong><fmt:formatNumber
+											value="${sessionScope.currentUser.user.client.point * 1000}" />
+										VNĐ</strong> vào hóa đơn.
+								</div>
+							</div>
+						</c:if>
 						<div class="mb-4">
 							<label class="form-label fw-bold">Phương thức thanh toán</label>
 							<div class="row g-2">
@@ -177,76 +158,12 @@ body {
 		</div>
 	</div>
 
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			const checkInInput = document.getElementById('checkIn');
-			const checkOutInput = document.getElementById('checkOut');
-			const totalAmountEl = document.getElementById('totalAmount');
-			const numNightsEl = document.getElementById('numNights');
-			const hiddenTotalPrice = document
-					.getElementById('hiddenTotalPrice');
-
-			// Lấy giá tiền từ attribute data-price (an toàn hơn là chèn trực tiếp vào script)
-			const basePrice = parseFloat(document.getElementById(
-					'roomPriceDisplay').getAttribute('data-price'));
-
-			// Thiết lập ngày tối thiểu là hôm nay
-			const today = new Date().toISOString().split('T')[0];
-			checkInInput.setAttribute('min', today);
-			checkOutInput.setAttribute('min', today);
-
-			function calculateTotal() {
-				const checkInDate = new Date(checkInInput.value);
-				const checkOutDate = new Date(checkOutInput.value);
-
-				// Logic: Nếu đã chọn cả 2 ngày
-				if (checkInInput.value && checkOutInput.value) {
-					if (checkOutDate > checkInDate) {
-						const diffTime = Math.abs(checkOutDate - checkInDate);
-						const diffDays = Math.ceil(diffTime
-								/ (1000 * 60 * 60 * 24));
-
-						const total = diffDays * basePrice;
-
-						// Cập nhật giao diện
-						numNightsEl.innerText = diffDays;
-						totalAmountEl.innerText = total.toLocaleString('vi-VN')
-								+ " VNĐ";
-
-						// Cập nhật hidden input (nếu cần gửi giá trị thô)
-						hiddenTotalPrice.value = total;
-					} else {
-						// Nếu ngày trả phòng <= ngày nhận phòng (thường đã bị chặn bởi min attribute, nhưng check thêm cho chắc)
-						numNightsEl.innerText = "0";
-						totalAmountEl.innerText = "0 VNĐ";
-					}
-				}
-			}
-
-			// Sự kiện: Khi thay đổi ngày nhận phòng -> Cập nhật ngày tối thiểu của ngày trả phòng
-			checkInInput.addEventListener('change', function() {
-				if (this.value) {
-					// Ngày trả phòng ít nhất phải là ngày hôm sau của ngày nhận phòng
-					const nextDay = new Date(this.value);
-					nextDay.setDate(nextDay.getDate() + 1);
-
-					const nextDayString = nextDay.toISOString().split('T')[0];
-					checkOutInput.setAttribute('min', nextDayString);
-
-					// Nếu ngày trả phòng hiện tại nhỏ hơn ngày min mới -> reset
-					if (checkOutInput.value
-							&& checkOutInput.value < nextDayString) {
-						checkOutInput.value = nextDayString;
-					}
-					calculateTotal();
-				}
-			});
-
-			checkOutInput.addEventListener('change', calculateTotal);
-		});
-	</script>
-
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/Booking.js"></script>
+
+	<script>
+		
+	</script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.example.Qlykhachsan.Config.VNPAYConfig;
 import com.example.Qlykhachsan.Model.Facility;
 import com.example.Qlykhachsan.Model.FacilityBooking;
+import com.example.Qlykhachsan.Model.RoomBooking;
 import com.example.Qlykhachsan.Repository.FacilityBookingRepository;
 import com.example.Qlykhachsan.util.VNPayUtil;
 
@@ -34,6 +36,11 @@ public class FacilityBookingService {
 
 	public FacilityBooking findByVnpTxnRef(String VnpTxnRef) {
 		return facilityBookingRepository.findByVnpTxnRef(VnpTxnRef);
+	}
+
+	public FacilityBooking getOrderById(Integer serviceBookingId) {
+		Optional<FacilityBooking> lst = facilityBookingRepository.findById(serviceBookingId);
+		return lst.orElse(null);
 	}
 
 	public String createVnPayUrl(double totalAmount, String orderInfor, String vnp_TxnRef, HttpServletRequest req) {

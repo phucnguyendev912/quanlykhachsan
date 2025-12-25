@@ -53,15 +53,14 @@ public class RoomBooking {
 	private double totalPrice;
 	@Column(name = "paymentMethod")
 	private String paymentMethod;
-
-	// Thêm trường này để quản lý trạng thái thanh toán
 	@Column(name = "status_payment")
 	private String statusPayment;
-
 	// Thêm mã giao dịch để đối chiếu với VNPAY
 	@Column(name = "vnp_txn_ref")
 	private String vnpTxnRef;
 	@Column(name = "datePayment")
 	private LocalDate datePayment;
+	@Column(name = "points_used")
+	private int pointsUsed = 0;
 
 }

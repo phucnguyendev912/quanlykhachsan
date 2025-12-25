@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -15,7 +16,9 @@ public class BookingHistory {
 	private int id;
 	private String itemName;
 	private Date bookingDate;
-	private Date useDate;
+	private Date dateCheckout;
+	private String usageTime;
+	private int quantity;
 	private double totalPirce;
 	private String status;
 }

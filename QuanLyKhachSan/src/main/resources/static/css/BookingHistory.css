@@ -1,0 +1,102 @@
+@charset "UTF-8";
+/* style.css */
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f4f7f6;
+	margin: 0;
+	padding: 0; /* Sửa padding body để header không bị hở */
+	color: #333;
+}
+
+/* Thêm padding cho nội dung chính để tách biệt với header */
+.main-content {
+	padding: 20px;
+}
+
+h2 {
+	text-align: center;
+	color: #2c3e50;
+	margin-bottom: 30px;
+	font-size: 28px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+/* Container bọc bảng */
+.table-container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto; /* Căn giữa màn hình */
+	background: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	overflow-x: auto; /* Quan trọng: Cho phép cuộn ngang trên mobile */
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	min-width: 900px;
+	/* Tăng min-width lên để các cột không bị ép quá nhỏ */
+}
+
+th, td {
+	padding: 15px;
+	text-align: left;
+	border-bottom: 1px solid #e0e0e0;
+	white-space: nowrap; /* Giữ nội dung trên 1 dòng */
+}
+
+th {
+	background-color: #34495e;
+	color: #ffffff;
+	font-weight: 600;
+	text-transform: uppercase;
+	font-size: 14px;
+}
+
+tr:nth-child(even) {
+	background-color: #f8f9fa;
+}
+
+tr:hover {
+	background-color: #e8f6f3;
+	transition: background-color 0.3s ease;
+}
+
+/* SỬA: Cột Tổng tiền là cột số 7 */
+td:nth-child(7) {
+	font-weight: bold;
+	color: #e74c3c;
+}
+
+/* Style cho cột Trạng thái (Cột số 8) nếu muốn */
+td:nth-child(8) {
+	font-weight: 500;
+	color: #2980b9;
+}
+
+.btn {
+	display: inline-block;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 4px;
+	font-size: 14px;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	border: none;
+	cursor: pointer;
+	text-align: center;
+}
+
+.btn-warning {
+	background-color: #f39c12;
+	color: #fff;
+}
+
+.btn-warning:hover {
+	background-color: #e67e22;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	transform: translateY(-1px);
+}

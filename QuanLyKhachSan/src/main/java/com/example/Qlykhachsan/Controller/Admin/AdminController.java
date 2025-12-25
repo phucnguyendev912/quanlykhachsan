@@ -1,6 +1,6 @@
-package com.example.Qlykhachsan.Controller;
+package com.example.Qlykhachsan.Controller.Admin;
 
-import org.springframework.stereotype.Controller; // Nhớ import cái này
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 

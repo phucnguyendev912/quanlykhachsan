@@ -47,7 +47,7 @@ public class FacilityController {
 		// Lấy thông tin dịch vụ để hiển thị tên
 		Facility facility = facilityService.getFacilityById(id);
 		model.addAttribute("service", facility);
-		return "bookingFacility"; // Trả về file booking.jsp
+		return "bookingFacility";
 	}
 
 //	@PostMapping("/confirm-Facilitybooking")
@@ -135,6 +135,7 @@ public class FacilityController {
 		booking.setBookingDate(facilitybooking.getBookingDate());
 		booking.setUsageTime(facilitybooking.getUsageTime());
 		booking.setNumberOf(turn);
+		booking.setFacilityName(facility.getServiceName());
 		booking.setFacilityPrice(facility.getServicePrice());
 		booking.setTotalPrice(totalAmount);
 		booking.setPaymentMethod(facilitybooking.getPaymentMethod());

@@ -15,11 +15,11 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-/* Ảnh phòng to đẹp */
+/* Ảnh phòng to đẹp (Ảnh chính) */
 .room-main-image {
 	width: 100%;
 	height: 450px;
-	object-fit: cover;
+	object-fit: cover; /* Giúp ảnh chính không bị méo */
 	border-radius: 15px;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -67,6 +67,32 @@
 	font-size: 14px;
 	color: #666;
 }
+
+/* --- CSS MỚI CHO PHẦN GỢI Ý (RELATED ROOMS) --- */
+.related-section {
+	margin-top: 50px;
+	padding-top: 30px;
+	border-top: 1px solid #eee;
+}
+
+.related-img {
+	width: 100%;
+	height: 220px; /* Chiều cao cố định cho tất cả ảnh */
+	object-fit: cover; /* Cắt ảnh cho vừa khung mà không bị méo */
+	border-top-left-radius: calc(0.375rem - 1px);
+	border-top-right-radius: calc(0.375rem - 1px);
+}
+
+.card {
+	height: 100%; /* Để các thẻ card bằng nhau */
+	border: none;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	transition: transform 0.3s;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+}
 </style>
 </head>
 <body>
@@ -84,7 +110,7 @@
 				<img src="${room.image}" class="room-main-image"
 					alt="${room.typeRoom}">
 
-				<h2 class="fw-bold text-primary mb-3">${room.typeRoom}</h2>
+				<h2 class="fw-bold text-primary mb-3 mt-4">${room.typeRoom}</h2>
 
 				<h5 class="fw-bold mt-4 mb-3">Mô tả phòng</h5>
 				<div class="room-description mb-4">
@@ -169,8 +195,35 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
+		<div class="related-section">
+			<h3 class="mb-4 fw-bold">Có thể bạn cũng thích</h3>
+			<div class="row">
+				<c:forEach var="r" items="${relatedRooms}">
+					<div class="col-md-3 mb-4">
+						<div class="card h-100">
+							<img src="${r.image}" class="card-img-top related-img"
+								alt="${r.typeRoom}"
+								onerror="this.src='https://via.placeholder.com/300x220?text=Room'">
+
+							<div class="card-body d-flex flex-column">
+								<h5 class="card-title text-truncate">${r.typeRoom}</h5>
+								<p class="text-danger fw-bold mb-3">
+									<fmt:formatNumber value="${r.priceRoom}" type="number" />
+									VNĐ
+								</p>
+								<a href="/room-detail?id=${r.roomId}"
+									class="btn btn-sm btn-outline-primary rounded-pill mt-auto w-100">
+									Xem chi tiết <i class="fa-solid fa-angle-right"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+
+	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -15,10 +15,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.Qlykhachsan.Config.VNPAYConfig;
+import com.example.Qlykhachsan.Model.Account;
+import com.example.Qlykhachsan.Model.Clients;
 import com.example.Qlykhachsan.Model.FacilityBooking;
 import com.example.Qlykhachsan.Model.RoomBooking;
 
 import com.example.Qlykhachsan.Model.Rooms;
+import com.example.Qlykhachsan.Model.User;
+import com.example.Qlykhachsan.Repository.ClientRepository;
 import com.example.Qlykhachsan.Repository.FacilityBookingRepository;
 import com.example.Qlykhachsan.Service.FacilityBookingService;
 import com.example.Qlykhachsan.Service.FacilityService;
@@ -27,6 +31,7 @@ import com.example.Qlykhachsan.Service.RoomService;
 import com.example.Qlykhachsan.util.VNPayUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class VNPayReturnController {
@@ -34,11 +39,10 @@ public class VNPayReturnController {
 	private RoomBookingService roomoInforService;
 	@Autowired
 	private RoomService roomService;
-
+	@Autowired
+	private ClientRepository clientRepository;
 	@Autowired
 	private FacilityBookingService facilityBookingService;
-	@Autowired
-	private FacilityService facilityService;
 
 //	@GetMapping("/vnpay-payment-return")
 //	public String vnpayReturn(HttpServletRequest request, Model model) {
@@ -116,7 +120,7 @@ public class VNPayReturnController {
 //		}
 //	}
 	@GetMapping("/vnpay-payment-return")
-	public String vnpayReturn(HttpServletRequest request, Model model) {
+	public String vnpayReturn(HttpServletRequest request, Model model, HttpSession session) {
 
 		Map<String, String> vnp_Params = new HashMap<>();
 		request.getParameterMap().forEach((key, value) -> {
@@ -156,15 +160,15 @@ public class VNPayReturnController {
 		String vnp_TxnRef = vnp_Params.get("vnp_TxnRef");
 		String vnp_BankCode = vnp_Params.get("vnp_BankCode");
 		long amount = Long.parseLong(vnp_Params.get("vnp_Amount")) / 100;
-
-		// ================== ROOM BOOKING ==================
+		int poitsToAdd = (int) (amount / 100000);
+		Clients clientToUpdate = null;
 		if (vnp_TxnRef.startsWith("_Room")) {
 
 			RoomBooking room = roomoInforService.getByTxnRef(vnp_TxnRef);
 			if (room != null) {
 				room.setStatusPayment("Đã thanh toán");
 				roomoInforService.saveBooking(room);
-
+				clientToUpdate = room.getClientId();
 				Rooms r = roomService.getRoomById(room.getRoomId());
 				if (r != null) {
 					r.setStatusroom("Đã đặt");
@@ -173,13 +177,25 @@ public class VNPayReturnController {
 			}
 		}
 
-		// ================== FACILITY BOOKING ==================
 		if (vnp_TxnRef.startsWith("_Fac")) {
 
 			FacilityBooking fb = facilityBookingService.findByVnpTxnRef(vnp_TxnRef);
 			if (fb != null) {
 				fb.setStatusPayment("Đã thanh toán");
 				facilityBookingService.saveFacilityBooking(fb);
+				Clients clientId = fb.getClientId();
+				clientToUpdate = clientRepository.findByClientId(clientId);
+			}
+		}
+		if (clientToUpdate != null) {
+			int oldPoints = clientToUpdate.getPoint();
+			clientToUpdate.setPoint(oldPoints + poitsToAdd);
+			clientRepository.save(clientToUpdate);
+			Account currentUser = (Account) session.getAttribute("currentUser");
+			if (currentUser != null
+					&& currentUser.getUser().getClient().getClientId() == clientToUpdate.getClientId()) {
+				currentUser.getUser().setClient(clientToUpdate);
+				session.setAttribute("currentUser", currentUser);
 			}
 		}
 

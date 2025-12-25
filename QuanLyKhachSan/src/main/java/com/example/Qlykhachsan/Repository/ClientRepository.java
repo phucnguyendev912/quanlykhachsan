@@ -7,5 +7,5 @@ import com.example.Qlykhachsan.Model.Clients;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Clients, Integer> {
-
+	public Clients findByClientId(Clients clientId);
 }

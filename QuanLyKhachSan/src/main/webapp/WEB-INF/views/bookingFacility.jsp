@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -170,23 +171,19 @@ body {
 
 			<div class="col-md-4 left-panel">
 				<div class="left-header">Thông tin dịch vụ</div>
-				<img
-					src="https://phuquocxanh.com/wp-content/uploads/2019/12/spa-ha-noi.jpg"
-					class="service-img" alt="Service">
+				<img src="${service.image }" class="service-img" alt="Service">
 
 				<div class="service-details">
-					<h5 class="service-name">Massage Body Thụy Điển</h5>
+					<h5 class="service-name">${service.serviceName }</h5>
 					<div class="mb-2">
-						<i class="bi bi-clock-history"></i> Thời lượng: <strong>60
-							phút</strong>
-					</div>
-					<div class="mb-3">
-						<i class="bi bi-people-fill"></i> Số phòng: <strong>VIP-01</strong>
+						<i class="bi bi-clock-history"></i> <strong>${service.timeapplyService}
+						</strong>
 					</div>
 
 					<div class="service-price">
-						500.000 VNĐ <span
-							style="font-size: 0.9rem; font-weight: 400; color: #777;">/
+						<fmt:formatNumber value="${service.servicePrice}" type="number"
+							groupingUsed="true" />
+						<span style="font-size: 0.9rem; font-weight: 400; color: #777;">/
 							suất</span>
 					</div>
 
@@ -206,13 +203,20 @@ body {
 						value="${service.facilityId}"> <input type="hidden"
 						name="paymentMethod" id="selectedPaymentMethod" value="VNPAY">
 					<input type="hidden" name="total_amount" id="hiddenTotal"
-						value="500000"> <input type="hidden" name="status"
-						value="Chờ thanh toán">
+						value="${service.servicePrice}"> <input type="hidden"
+						name="status" value="Chờ thanh toán">
 
 					<div class="row mb-3">
 						<div class="col-md-6">
-							<label class="form-label fw-bold">Ngày sử dụng</label> <input
-								type="date" name="bookingDate" required>
+							<jsp:useBean id="today" class="java.util.Date" />
+
+							<label class="form-label fw-bold">Ngày sử dụng</label><input
+								type="date" class="form-control" name="bookingDate"
+								id="bookingDate" required
+								min="<fmt:formatDate value='${today}' pattern='yyyy-MM-dd'/>"
+								value="<fmt:formatDate value='${today}' pattern='yyyy-MM-dd'/>">
+
+
 						</div>
 						<div class="col-md-6">
 							<label class="form-label fw-bold">Khung giờ</label> <select
@@ -265,13 +269,17 @@ body {
 							<div class="text-muted" style="font-size: 0.8rem;">Vui lòng
 								kiểm tra kỹ thông tin</div>
 						</div>
-						<div class="total-value" id="displayTotal">500.000 VNĐ</div>
+						<div class="total-value" id="displayTotal">
+							<fmt:formatNumber value="${service.servicePrice}" type="number"
+								groupingUsed="true" />
+							VNĐ
+						</div>
 						<i class="bi bi-receipt text-danger"
 							style="font-size: 2rem; opacity: 0.5;"></i>
 					</div>
 
 					<button type="submit" class="btn btn-primary btn-pay">
-						<i class="bi bi-check-circle-fill me-2"></i> Thanh Toán Ngay
+						<i class="bi bi-check-circle-fill me-2"></i> Thanh Toán
 					</button>
 				</form>
 			</div>
@@ -279,31 +287,29 @@ body {
 	</div>
 
 	<script>
-    const basePrice = 500000;
+    const basePrice = ${service.servicePrice};
 
     function updateTotal() {
-        let qty = document.getElementById("quantity").value;
-        if(qty < 1) { qty = 1; document.getElementById("quantity").value = 1; }
-        
+        let qty = document.getElementById("numberOf").value;
+        if (qty < 1) {
+            qty = 1;
+            document.getElementById("numberOf").value = 1;
+        }
+
         let total = basePrice * qty;
-        
-        // Cập nhật text hiển thị
-        document.getElementById("displayTotal").innerText = total.toLocaleString('vi-VN') + " VNĐ";
+
+        document.getElementById("displayTotal").innerText =
+            total.toLocaleString('vi-VN') + " VNĐ";
+
         document.getElementById("qtyLabel").innerText = qty;
-        
-        // Cập nhật vào input ẩn để gửi đi
         document.getElementById("hiddenTotal").value = total;
     }
 
     function selectPayment(element, methodValue) {
-        // Xóa class active ở tất cả các nút
         let options = document.querySelectorAll('.payment-option');
         options.forEach(opt => opt.classList.remove('active'));
-        
-        // Thêm class active cho nút được chọn
+
         element.classList.add('active');
-        
-        // Cập nhật giá trị vào input ẩn
         document.getElementById("selectedPaymentMethod").value = methodValue;
     }
 </script>
