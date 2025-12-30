@@ -19,6 +19,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="row">
+			<c:set var="activePage" value="room" />
 			<jsp:include page="Sidebar.jsp" />
 
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
@@ -74,11 +75,10 @@
 														<span class="badge bg-secondary">${room.statusroom}</span>
 													</c:otherwise>
 												</c:choose></td>
-											<td class="text-center"><a
-												href="/admin/rooms/edit/${room.roomId}"
+											<td class="text-center"><a href="/edit/${room.roomId}"
 												class="btn btn-warning btn-sm" title="Sửa"> <i
 													class="fas fa-edit"></i>
-											</a> <a href="/admin/rooms/delete/${room.roomId}"
+											</a> <a href="/Delete/${room.roomId}"
 												class="btn btn-danger btn-sm"
 												onclick="return confirm('Bạn có chắc chắn muốn xóa phòng số ${room.roomNumber} không?');"
 												title="Xóa"> <i class="fas fa-trash"></i>

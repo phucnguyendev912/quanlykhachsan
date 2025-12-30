@@ -21,8 +21,8 @@
 
 			<li class="nav-item"><a
 				class="nav-link ${activePage == 'bookings' ? 'active' : ''}"
-				href="/admin/bookings"> <i class="fas fa-calendar-check me-2"></i>
-					Đặt phòng (Booking)
+				href="/bookingroomManagement"> <i
+					class="fas fa-calendar-check me-2"></i> Đặt phòng (Booking)
 			</a></li>
 
 			<li class="nav-item"><a

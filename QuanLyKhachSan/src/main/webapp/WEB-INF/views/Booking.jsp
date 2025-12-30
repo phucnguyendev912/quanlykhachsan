@@ -55,9 +55,21 @@
 					<form action="${pageContext.request.contextPath}/confirm-booking"
 						method="post" id="bookingForm">
 						<input type="hidden" name="roomId" value="${room.roomId}">
-
+						<input type="hidden" name="roomNumber" value="${room.roomNumber}">
 						<input type="hidden" name="totalPriceParam" id="hiddenTotalPrice">
 
+						<div class="col-md-6 mb-3">
+							<label class="form-label fw-bold">Họ và tên</label> <input
+								type="text" name="name" class="form-control"
+								value=""
+								placeholder="Nhập họ tên người nhận phòng" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label fw-bold">Số điện thoại</label> <input
+								type="tel" name="phoneNumber" class="form-control"
+								value=""
+								placeholder="Nhập số điện thoại liên hệ" required>
+						</div>
 						<div class="row">
 							<div class="col-md-6 mb-3">
 								<label class="form-label fw-bold">Ngày nhận phòng</label> <input

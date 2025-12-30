@@ -28,55 +28,56 @@
 				<div class="card shadow-sm mt-3">
 					<div class="card-body">
 						<form action="/add" method="post">
-
+							<input type="hidden" name="roomId" value="${room.roomId}">
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label class="form-label">Số phòng (*)</label> <input
-										type="number" class="form-control" name="roomNumber" required
-										placeholder="Ví dụ: 101">
+										type="number" class="form-control" name="roomNumber"
+										value="${room.roomNumber}" required placeholder="Ví dụ: 101">
 								</div>
 								<div class="col-md-6">
 									<label class="form-label">Giá phòng (VNĐ)</label> <input
-										type="number" class="form-control" name="priceRoom" required>
+										type="number" class="form-control" name="priceRoom"
+										value="${room.priceRoom}" required>
 								</div>
 							</div>
 
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label class="form-label">Loại phòng</label> <input type="text"
-										name="typeRoom" required placeholder="Ví dụ: Phòng couple">
+										name="typeRoom" value="${room.typeRoom }" required
+										placeholder="Ví dụ: Phòng couple">
 								</div>
 								<div class="col-md-6">
-									<label class="form-label">Sức chứa (Người)</label> <input
+									<label class="form-label">Số lượng (Người)</label> <input
 										type="number" class="form-control" name="numberOfclient"
-										value="2">
+										value="${room.numberOfclient}">
 								</div>
 							</div>
 
 							<div class="row mb-3">
 								<div class="col-md-6">
 									<label class="form-label">Diện tích (m2)</label> <input
-										type="number" step="0.1" class="form-control" name="acreage">
+										type="number" step="0.1" class="form-control" name="acreage"
+										value="${room.acreage }">
 								</div>
 								<div class="col-md-6">
 									<label class="form-label">Trạng thái ban đầu</label> <select
 										class="form-select" name="statusroom">
 										<option value="Trống">Trống</option>
-										<option value="Đang sửa chữa">Đang sửa chữa</option>
+										<option value="Trống">Đã đặt</option>
 									</select>
 								</div>
 							</div>
-
 							<div class="mb-3">
-								<label class="form-label">Link Ảnh (URL)</label> <input
+								<label class="form-label">Link Ảnh</label> <input
 									type="text" class="form-control" name="image"
-									placeholder="https://..."> <small class="text-muted">Tạm
-									thời điền link ảnh trên mạng. Chức năng upload file sẽ làm sau.</small>
+									value="${room.image}" placeholder="https://...">
 							</div>
 
 							<div class="mb-3">
 								<label class="form-label">Mô tả</label>
-								<textarea class="form-control" name="description" rows="3"></textarea>
+								<textarea class="form-control" name="description" rows="3">${room.description}</textarea>
 							</div>
 
 							<button type="submit" class="btn btn-primary">Lưu Phòng</button>

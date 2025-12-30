@@ -31,7 +31,7 @@ public class RoomBooking {
 	@Column(name = "room_id")
 	private Integer roomId;
 
-	@ManyToOne // Hoặc @OneToOne tùy logic
+	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Clients clientId;
 
@@ -43,10 +43,14 @@ public class RoomBooking {
 
 	@Column(name = "date_order")
 	private Date dateOrder;
-
+	@Column(name = "Name")
+	private String name;
+	@Column(name = "phoneNumber")
+	private String phoneNumber;
 	@Column(name = "date_checkout")
 	private Date dateCheckout;
-
+	@Column(name = "roomNumber")
+	private Integer roomNumber;
 	@Column(name = "numberOfclient")
 	private Integer numberOfclient;
 	@Column(name = "total_amount")

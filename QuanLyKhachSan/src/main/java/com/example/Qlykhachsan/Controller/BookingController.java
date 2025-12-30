@@ -99,7 +99,10 @@ public class BookingController {
 		booking.setDateCheckout(Booking.getDateCheckout());
 		booking.setNumberOfclient(Booking.getNumberOfclient());
 		booking.setRoomsPrice(room.getPriceRoom());
+		booking.setName(Booking.getName());
+		booking.setPhoneNumber(Booking.getPhoneNumber());
 		booking.setTypeRooms(room.getTypeRoom());
+		booking.setRoomNumber(Booking.getRoomNumber());
 		booking.setDatePayment(LocalDate.now());
 		booking.setTotalPrice(finalPrice);
 		booking.setPaymentMethod(Booking.getPaymentMethod());

@@ -7,5 +7,5 @@ import com.example.Qlykhachsan.Model.Rooms;
 
 @Repository
 public interface RoomManagementAdminRepository extends JpaRepository<Rooms, Integer> {
-
+	
 }

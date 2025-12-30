@@ -38,16 +38,6 @@ public class RePayMentController {
 		// 1. Lấy thông tin đơn hàng từ DB
 		RoomBooking booking = roomBookingService.getOrderById(bookingId);
 
-		if (booking == null) {
-			return "redirect:/error";
-		}
-		if ("Đã hủy".equals(booking.getStatusPayment())) {
-			return "booking-error";
-		}
-		if ("Đã thanh toán".equals(booking.getStatusPayment())) {
-			return "redirect:BookingHistorycontroller";
-		}
-
 		// 3. Tạo Mã giao dịch MỚI
 		String vnp_TxnRef = "_Room" + VNPAYConfig.getRandomNumber(8);
 
@@ -64,7 +54,7 @@ public class RePayMentController {
 		double totalAmount = booking.getTotalPrice();
 		String orderInfo = "Thanh toan lai phong don hang " + bookingId;
 
-		// 6. Gọi hàm tạo URL từ Service (Hàm này bạn đã viết ở bước trước)
+		// 6. Gọi hàm tạo URL từ Service
 		String newPaymentUrl = roomBookingService.createVnPayUrl(totalAmount, orderInfo, vnp_TxnRef, req);
 
 		// 7. Chuyển hướng sang VNPay

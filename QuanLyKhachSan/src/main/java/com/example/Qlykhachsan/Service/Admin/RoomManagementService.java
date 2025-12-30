@@ -20,5 +20,12 @@ public class RoomManagementService {
 	public Rooms addroom(Rooms r) {
 		return roomManagementAdminRepository.save(r);
 	}
+	public Rooms getRoomById(int roomid) {
+	    // Hàm này tìm phòng trong DB, 
+	    return roomManagementAdminRepository.findById(roomid).get(); 
+	}
 
+	public void DeleteRoom(int roomId) {
+		roomManagementAdminRepository.deleteById(roomId);;
+	}
 }
