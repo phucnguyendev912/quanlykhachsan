@@ -1,5 +1,8 @@
 package com.example.Qlykhachsan.Controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +29,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public String login(@ModelAttribute("loginRequest") LoginRequest request, HttpSession session, Model model) {
+	public String login(@ModelAttribute("loginRequest") LoginRequest request, HttpSession session, Model model) throws UnsupportedClassVersionError, NoSuchAlgorithmException, UnsupportedEncodingException {
 		// goi ham login
 		Account account = authService.login(request);
 		if (account != null) {

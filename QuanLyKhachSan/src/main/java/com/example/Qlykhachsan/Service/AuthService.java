@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.Qlykhachsan.Config.passwordConfig;
 import com.example.Qlykhachsan.Dto.LoginRequest;
 import com.example.Qlykhachsan.Dto.RegisterRequest;
 import com.example.Qlykhachsan.Model.Account;
@@ -59,11 +60,11 @@ public class AuthService {
 			newRole.setStatus("Active");
 			return roleRepository.save(newRole);
 		});
-		//String encryptpassword = bCryptPasswordEncoder.encode(request.getPassword());
+		String encryptpassword = passwordConfig.ecrypt(request.getPassword());
 		// 4.Tao account
 		Account newAccount = new Account();
 		newAccount.setAccountName(request.getUsername());
-		newAccount.setPassword(request.getPassword()); // da ma hoa
+		newAccount.setPassword(encryptpassword); // da ma hoa
 		newAccount.setUser(savedUser);
 		newAccount.setRole(roleUser);
 		accountRepository.save(newAccount);
@@ -78,7 +79,7 @@ public class AuthService {
 	}
 
 	// login
-	public Account login(LoginRequest loginRequest) {
+	public Account login(LoginRequest loginRequest) throws UnsupportedClassVersionError, NoSuchAlgorithmException, UnsupportedEncodingException {
 		// dung optional de tranh null
 		// lay ten nguoi dung tu form ve thong qua pakage dto sau do ham
 		// finByAccountName se tim trong database co trung voi ten dang
@@ -87,7 +88,8 @@ public class AuthService {
 		if (opAccount.isPresent()) {
 			// lay doi tuong account
 			Account account = opAccount.get();
-			if (account.getPassword().equals(loginRequest.getPassword())) {
+			String passwordEncrypt=passwordConfig.ecrypt(loginRequest.getPassword());
+			if (account.getPassword().equals(passwordEncrypt)) {
 				return account;
 			}
 		}

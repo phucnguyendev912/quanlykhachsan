@@ -1,13 +1,18 @@
-//package com.example.Qlykhachsan.Config;
-//
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//
-//@Configuration
-//public class passwordConfig {
-//	@Bean
-//     BCryptPasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//}
+package com.example.Qlykhachsan.Config;
+
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class passwordConfig {
+	public static String ecrypt(String text) throws NoSuchAlgorithmException, UnsupportedClassVersionError, UnsupportedEncodingException {
+		String enrtext;
+		MessageDigest msd = MessageDigest.getInstance("MD5");
+		byte[] srctextbyte = text.getBytes("UTF-8");
+		byte[] enrtextbyte = msd.digest(srctextbyte);
+		BigInteger big = new BigInteger(1, enrtextbyte);
+		enrtext = big.toString(16);
+		return enrtext;
+	}
+}
