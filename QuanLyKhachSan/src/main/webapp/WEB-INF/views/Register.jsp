@@ -34,7 +34,7 @@
 
 					<div class="mb-3">
 						<label for="fullname" class="form-label">Họ và Tên</label> <input
-							type="text" class="form-control" id="fullname" name="fullName"
+							type="text" class="form-control" id="fullname" name="fullname"
 							placeholder="Ví dụ: Nguyen Hoang Thien Phuc" required>
 					</div>
 
@@ -53,7 +53,7 @@
 						<div class="col-md-6 mb-3">
 							<label for="phonenumber" class="form-label">Số điện thoại</label>
 							<input type="tel" class="form-control" id="phonenumber"
-								name="phonenumber" placeholder="034..." required>
+								name="phoneNumber" placeholder="034..." required>
 						</div>
 					</div>
 

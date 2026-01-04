@@ -13,6 +13,6 @@ import com.example.Qlykhachsan.Model.FacilityBooking;
 public interface FacilityBookingRepository extends JpaRepository<FacilityBooking, Integer> {
 	FacilityBooking findByVnpTxnRef(String vnpTxnRef);
 
-	List<FacilityBooking> findByClientId(Clients clientId);
+	List<FacilityBooking> findByClient(Clients clientId);
 
 }

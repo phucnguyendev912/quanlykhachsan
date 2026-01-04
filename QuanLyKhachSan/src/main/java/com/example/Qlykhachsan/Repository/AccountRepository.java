@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.Qlykhachsan.Model.Account;
+import com.example.Qlykhachsan.Model.User;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
@@ -13,4 +14,6 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 	boolean existsByAccountName(String accountName);
 
 	Optional<Account> findByAccountName(String accountName);
+	Account findByUser(User user);
+	
 }

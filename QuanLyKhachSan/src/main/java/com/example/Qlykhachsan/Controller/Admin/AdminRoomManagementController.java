@@ -50,7 +50,7 @@ public class AdminRoomManagementController {
 	}
 
 	@GetMapping("/Delete/{id}")
-	public String deleteRoom(@PathVariable("id") int roomId, Model model) {
+	public String deleteRoom(@PathVariable("id") int roomId) {
 		roomManagementService.DeleteRoom(roomId);
 		return "redirect:/roomManagement";
 	}

@@ -27,7 +27,7 @@ public class BookingHistoryService {
 			result.add(new BookingHistory("Room", rb.getRoominfoId(), rb.getTypeRooms(), rb.getDateOrder(),
 					rb.getDateCheckout(), null, rb.getNumberOfclient(), rb.getTotalPrice(), rb.getStatusPayment()));
 		}
-		for (FacilityBooking fb : facilityBookingRepository.findByClientId(clientId)) {
+		for (FacilityBooking fb : facilityBookingRepository.findByClient(clientId)) {
 			result.add(
 					new BookingHistory("Facility", fb.getServiceBookingId(), fb.getFacilityName(), fb.getBookingDate(),
 							null, fb.getUsageTime(), fb.getNumberOf(), fb.getTotalPrice(), fb.getStatusPayment()));

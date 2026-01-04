@@ -114,7 +114,8 @@ public class FacilityController {
 		}
 
 		User user = (User) session.getAttribute("userId");
-		Clients client = user.getClient();
+		Clients clientId = currentUser.getUser().getClient();
+		
 
 		Facility facility = facilityService.getFacilityById(facilityId);
 		if (facility == null) {
@@ -131,7 +132,7 @@ public class FacilityController {
 
 		FacilityBooking booking = new FacilityBooking();
 		booking.setFacility(facility);
-		booking.setClientId(client);
+		booking.setClient(clientId);
 		booking.setBookingDate(facilitybooking.getBookingDate());
 		booking.setUsageTime(facilitybooking.getUsageTime());
 		booking.setNumberOf(turn);

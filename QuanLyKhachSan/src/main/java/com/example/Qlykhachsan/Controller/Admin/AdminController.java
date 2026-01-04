@@ -8,7 +8,7 @@ import com.example.Qlykhachsan.Model.Account;
 
 import jakarta.servlet.http.HttpSession;
 
-@Controller // <--- BẮT BUỘC PHẢI CÓ
+@Controller 
 public class AdminController {
 
 	@GetMapping("/admin")
@@ -17,17 +17,20 @@ public class AdminController {
 		// 1. Lấy user hiện tại từ session
 		Account currentUser = (Account) session.getAttribute("currentUser");
 
-		// 2. CHECK BẢO MẬT (Quan trọng)
-		// Nếu chưa đăng nhập HOẶC role không phải admin -> Đá về trang login
+		
 		if (currentUser == null || !currentUser.getRole().getRoleName().equalsIgnoreCase("admin")) {
 			return "redirect:/login";
 		}
 
-		// 3. Nếu đúng là Admin thì gửi tên sang giao diện
+		
 		model.addAttribute("adminName", currentUser.getAccountName());
 
-		// 4. Trả về đúng tên file JSP bạn đã tạo
-		// Nếu file bạn tên là AdminDashboard.jsp thì điền vào đây
+		
+		
 		return "admin";
+	}
+	@GetMapping("/Dashboard")
+	public String Dashboard(Model model) {
+		return "Dashboard";
 	}
 }

@@ -96,16 +96,24 @@
 													data-datepay="${b.datePayment}"
 													data-points="${b.pointsUsed}"
 													data-price-per-room="${b.roomsPrice}"
+													data-statusBooking="${b.statusBooking}"
 													data-num-client="${b.numberOfclient}" title="Xem chi tiết">
 													<i class="fas fa-eye"></i>
 												</button> <c:if
 													test="${b.statusPayment != 'Đã hủy' && b.statusPayment != 'Đã trả phòng'}">
-													<a href="checkout?id=${b.roominfoId}&roomId=${b.roomId}"
+													<a href="/checkin?id=${b.roominfoId}"
+														class="btn btn-warning btn-sm ms-1"
+														title="Check-in khách"
+														onclick="return confirm('Xác nhận làm thủ tục nhận phòng (Check-in) cho phòng ${b.roomId}?')">
+														<i class="fa-solid fa-key"></i>
+													</a>
+													<a href="/checkout?id=${b.roominfoId}"
 														class="btn btn-warning btn-sm ms-1"
 														title="Check-out khách"
 														onclick="return confirm('Xác nhận làm thủ tục trả phòng (Check-out) cho phòng ${b.roomId}?')">
 														<i class="fa-solid fa-right-from-bracket"></i>
 													</a>
+													
 												</c:if>
 											</td>
 										</tr>
@@ -151,6 +159,10 @@
 						</li>
 						<li
 							class="list-group-item d-flex justify-content-between align-items-center">
+							Trạng thái đặt phòng: <strong id="modalstatusBooking"></strong>
+						</li>
+						<li
+							class="list-group-item d-flex justify-content-between align-items-center">
 							Số lượng khách: <strong id="modalNumClient"></strong>
 						</li>
 						<li
@@ -185,6 +197,7 @@
             const datepay = button.getAttribute('data-datepay');
             const points = button.getAttribute('data-points');
             const priceRoom = button.getAttribute('data-price-per-room'); // Đang là số thô
+            const statusBooking=button.getAttribute('data-statusBooking');
             const numClient = button.getAttribute('data-num-client');
 
             // Format lại tiền tệ cho đẹp (VND)
@@ -199,6 +212,7 @@
             document.getElementById('modalPriceRoom').textContent = formattedPrice;
             document.getElementById('modalNumClient').textContent = numClient + ' người';
             document.getElementById('modalPoints').textContent = points;
+            document.getElementById("modalstatusBooking").textContent=statusBooking;
         });
     </script>
 </body>

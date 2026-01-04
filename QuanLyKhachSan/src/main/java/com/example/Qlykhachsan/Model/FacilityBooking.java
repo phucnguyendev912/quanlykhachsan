@@ -25,6 +25,7 @@ import lombok.Setter;
 @Table(name = "ServiceBookings")
 public class FacilityBooking {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "booking_id", nullable = false)
 	private Integer serviceBookingId;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -34,7 +35,7 @@ public class FacilityBooking {
 	private String facilityName;
 	@ManyToOne
 	@JoinColumn(name = "client_id", nullable = false)
-	private Clients clientId;
+	private Clients client;
 	@Column(name = "booking_date", nullable = true)
 	private Date bookingDate;
 	@Column(name = "servicePrice", nullable = true)

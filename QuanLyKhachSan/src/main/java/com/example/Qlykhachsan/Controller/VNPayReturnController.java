@@ -183,8 +183,7 @@ public class VNPayReturnController {
 			if (fb != null) {
 				fb.setStatusPayment("Đã thanh toán");
 				facilityBookingService.saveFacilityBooking(fb);
-				Clients clientId = fb.getClientId();
-				clientToUpdate = clientRepository.findByClientId(clientId);
+				clientToUpdate = fb.getClient();
 			}
 		}
 		if (clientToUpdate != null) {

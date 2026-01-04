@@ -1,5 +1,8 @@
 package com.example.Qlykhachsan.Controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +25,9 @@ public class RegisterController {
 	}
  
 	@PostMapping("/register")
-	public String registerSubmit(@ModelAttribute("registerRequest") RegisterRequest request, Model model) {
+	public String registerSubmit(@ModelAttribute("registerRequest") RegisterRequest request, Model model) throws UnsupportedClassVersionError, NoSuchAlgorithmException, UnsupportedEncodingException {
 
-		// Gọi Service để xử lý logic (lưu vào DB, mã hóa pass, set status...)
+		// Gọi Service để xử lý logic 
 		// Giả sử hàm register trả về true nếu thành công
 		boolean isSuccess = authService.register(request);
 

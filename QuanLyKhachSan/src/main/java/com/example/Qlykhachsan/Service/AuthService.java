@@ -1,8 +1,12 @@
 package com.example.Qlykhachsan.Service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,14 +31,16 @@ public class AuthService {
 	private ClientRepository clientRepository;
 	@Autowired
 	private RoleRepository roleRepository;
+	
 
 	@Transactional
-	public boolean register(RegisterRequest request) {
+	public boolean register(RegisterRequest request)
+			throws UnsupportedClassVersionError, NoSuchAlgorithmException, UnsupportedEncodingException {
 		// 1 kiem tra xem username da ton tai chua
 		if (accountRepository.existsByAccountName(request.getUsername())) {
 			throw new RuntimeException("Tên đăng nhập đã tồn tại, vui lòng chọn tên đăng nhập khác");
 		}
-		// 2 tạo user(lưu thông tin cá nhân trước để lấy id)
+		// 2 tạo user
 		User users = new User();
 		users.setFullname(request.getFullname());
 		users.setDob(request.getDob());
@@ -53,10 +59,11 @@ public class AuthService {
 			newRole.setStatus("Active");
 			return roleRepository.save(newRole);
 		});
+		//String encryptpassword = bCryptPasswordEncoder.encode(request.getPassword());
 		// 4.Tao account
 		Account newAccount = new Account();
 		newAccount.setAccountName(request.getUsername());
-		newAccount.setPassword(request.getPassword()); // chua ma hoa
+		newAccount.setPassword(request.getPassword()); // da ma hoa
 		newAccount.setUser(savedUser);
 		newAccount.setRole(roleUser);
 		accountRepository.save(newAccount);

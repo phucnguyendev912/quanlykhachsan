@@ -16,4 +16,10 @@ public class BookingRoomManagementService {
 	public List<RoomBooking> getRoomBooking() {
 		return roomBookingRepository.findAll();
 	}
+	public RoomBooking getRoomBookingById(Integer roombookingId) {
+		return roomBookingRepository.findById(roombookingId).orElse(null);
+	}
+	public RoomBooking saveBooking(RoomBooking roomInfo) {
+		return roomBookingRepository.save(roomInfo);
+	}
 }

@@ -26,6 +26,6 @@ public class RoomManagementService {
 	}
 
 	public void DeleteRoom(int roomId) {
-		roomManagementAdminRepository.deleteById(roomId);;
+		roomManagementAdminRepository.deleteById(roomId);
 	}
 }

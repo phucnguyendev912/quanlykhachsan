@@ -37,10 +37,8 @@ public class RoomBooking {
 
 	@Column(name = "type_rooms")
 	private String typeRooms;
-
 	@Column(name = "rooms_price")
 	private double roomsPrice;
-
 	@Column(name = "date_order")
 	private Date dateOrder;
 	@Column(name = "Name")
@@ -59,11 +57,12 @@ public class RoomBooking {
 	private String paymentMethod;
 	@Column(name = "status_payment")
 	private String statusPayment;
-	// Thêm mã giao dịch để đối chiếu với VNPAY
 	@Column(name = "vnp_txn_ref")
 	private String vnpTxnRef;
 	@Column(name = "datePayment")
 	private LocalDate datePayment;
+	@Column(name="statusBooking")
+	private String statusBooking;
 	@Column(name = "points_used")
 	private int pointsUsed = 0;
 

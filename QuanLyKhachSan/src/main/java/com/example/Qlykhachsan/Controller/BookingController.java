@@ -106,6 +106,7 @@ public class BookingController {
 		booking.setDatePayment(LocalDate.now());
 		booking.setTotalPrice(finalPrice);
 		booking.setPaymentMethod(Booking.getPaymentMethod());
+		booking.setStatusBooking("Chưa check in ");
 		booking.setVnpTxnRef(vnp_TxnRef);
 		if (finalPrice <= 0) {
 			booking.setStatusPayment("Đã thanh toán(Dùng điểm)");

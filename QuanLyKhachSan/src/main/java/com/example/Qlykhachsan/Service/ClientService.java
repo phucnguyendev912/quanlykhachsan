@@ -22,4 +22,5 @@ public class ClientService {
 		client.setPoint(newPoint);
 		clientRepository.save(client);
 	}
+	
 }
