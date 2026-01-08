@@ -19,14 +19,15 @@ public class chatService {
 	private HotelKnowledgeService hotelKnowledgeService;
 
 	public String getChatResponse(String userMsg) throws Exception {
-
 		String knowledge = hotelKnowledgeService.loadknowledegePrompt("D://MyHotelProject//room.xlsx");
-
+		System.out.println("===== KNOWLEDGE =====");
+		System.out.println(knowledge);
+		System.out.println("=====================");
 		String systemPrompt = """
 				Bạn là Win – lễ tân ảo của My Hotel.
 				Chỉ trả lời dựa trên dữ liệu sau:
 				""" + knowledge + """
-				Nếu không có thông tin, hãy nói bạn chưa có dữ liệu.
+				Nếu không có thông tin, hãy nói hiện tại không có dịch vụ  hoặc phòng phù hợp.
 				""";
 
 		HttpClient client = HttpClient.newHttpClient();
@@ -35,7 +36,7 @@ public class chatService {
 
 		Map<String, Object> body = Map.of("model", "deepseek-chat", "messages",
 				List.of(Map.of("role", "system", "content", systemPrompt), Map.of("role", "user", "content", userMsg)));
-		
+
 		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(API_URL))
 				.header("Content-Type", "application/json").header("Authorization", "Bearer " + API_KEY)
 				.POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(body))).build();
