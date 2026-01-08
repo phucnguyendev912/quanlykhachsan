@@ -160,25 +160,37 @@ public class VNPayReturnController {
 		String vnp_TxnRef = vnp_Params.get("vnp_TxnRef");
 		String vnp_BankCode = vnp_Params.get("vnp_BankCode");
 		long amount = Long.parseLong(vnp_Params.get("vnp_Amount")) / 100;
-		int poitsToAdd = (int) (amount / 100000);
+		int pointsToAdd = 0;
 		Clients clientToUpdate = null;
 		if (vnp_TxnRef.startsWith("_Room")) {
-
 			RoomBooking room = roomoInforService.getByTxnRef(vnp_TxnRef);
 			if (room != null) {
 				room.setStatusPayment("Đã thanh toán");
 				roomoInforService.saveBooking(room);
+				if (room.getPointsUsed() > 0) {
+					Clients clients = room.getClientId();
+					clients.setPoint(clients.getPoint() - room.getPointsUsed());
+					if (clients.getPoint() < 0) {
+						clients.setPoint(0);
+					}
+					clientRepository.save(clients);
+				}
 				clientToUpdate = room.getClientId();
 				Rooms r = roomService.getRoomById(room.getRoomId());
 				if (r != null) {
 					r.setStatusroom("Đã đặt");
 					roomService.save(r);
 				}
+				if (!room.isPointRewarded() && room.getPointsUsed() == 0) {
+					pointsToAdd = (int) (amount / 100000);
+					room.setPointRewarded(true);
+					roomoInforService.saveBooking(room);
+				}
+
 			}
 		}
 
 		if (vnp_TxnRef.startsWith("_Fac")) {
-
 			FacilityBooking fb = facilityBookingService.findByVnpTxnRef(vnp_TxnRef);
 			if (fb != null) {
 				fb.setStatusPayment("Đã thanh toán");
@@ -186,9 +198,9 @@ public class VNPayReturnController {
 				clientToUpdate = fb.getClient();
 			}
 		}
-		if (clientToUpdate != null) {
-			int oldPoints = clientToUpdate.getPoint();
-			clientToUpdate.setPoint(oldPoints + poitsToAdd);
+		if (clientToUpdate != null && pointsToAdd > 0) {
+
+			clientToUpdate.setPoint(clientToUpdate.getPoint() + pointsToAdd);
 			clientRepository.save(clientToUpdate);
 			Account currentUser = (Account) session.getAttribute("currentUser");
 			if (currentUser != null
@@ -201,7 +213,6 @@ public class VNPayReturnController {
 		model.addAttribute("vnp_TxnRef", vnp_TxnRef);
 		model.addAttribute("amount", amount);
 		model.addAttribute("vnp_BankCode", vnp_BankCode);
-
 		return "payment-success";
 	}
 

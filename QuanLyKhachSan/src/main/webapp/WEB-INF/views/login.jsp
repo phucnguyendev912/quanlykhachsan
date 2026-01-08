@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +74,7 @@ body {
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item"><a class="nav-link"
-						href="LoginController">Đăng ký</a></li>
+						href="/register">Đăng ký</a></li>
 
 				</ul>
 			</div>
@@ -130,15 +131,22 @@ body {
 					</div>
 					<a href="#" class="small">Quên mật khẩu?</a>
 				</div>
-
+				<c:if test="${not empty Error}">
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert">
+						${Error}
+						
+					</div>
+				</c:if>
 				<div class="d-grid mb-3">
 					<button type="submit" class="btn btn-primary btn-lg">Đăng
 						nhập</button>
 				</div>
 
 				<div class="text-center small text-muted">
-					Chưa có tài khoản? <a href="#">Đăng ký</a>
+					Chưa có tài khoản? <a href="/register">Đăng ký</a>
 				</div>
+
 			</form>
 		</main>
 	</div>
@@ -180,6 +188,16 @@ body {
 				}, false);
 			}
 		})();
+		document.addEventListener('DOMContentLoaded', function() {
+			const alert = document.querySelector('.alert');
+			if (alert) {
+				setTimeout(function() {
+					// Sử dụng API của Bootstrap để đóng alert mượt mà
+					const bsAlert = new bootstrap.Alert(alert);
+					bsAlert.close();
+				}, 3000); // Bạn có thể thay đổi thời gian ở đây (3000 = 3 giây)
+			}
+		});
 	</script>
 
 </body>

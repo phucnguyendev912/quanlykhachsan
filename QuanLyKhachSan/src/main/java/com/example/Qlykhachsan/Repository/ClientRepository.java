@@ -8,6 +8,7 @@ import com.example.Qlykhachsan.Model.User;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Clients, Integer> {
-	public Clients findByClientId(Integer clientId);
-	 Clients findByUser(User user);
+	Clients findByClientId(Clients clientId);
+
+	Clients findByUser(User user);
 }

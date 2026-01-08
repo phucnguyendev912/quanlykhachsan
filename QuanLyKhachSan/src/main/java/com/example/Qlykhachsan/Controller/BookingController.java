@@ -108,25 +108,23 @@ public class BookingController {
 		booking.setPaymentMethod(Booking.getPaymentMethod());
 		booking.setStatusBooking("Chưa check in ");
 		booking.setVnpTxnRef(vnp_TxnRef);
+		booking.setPointsUsed(pointUsed);
+		booking.setPointRewarded(false);
 		if (finalPrice <= 0) {
 			booking.setStatusPayment("Đã thanh toán(Dùng điểm)");
 		} else {
 			booking.setStatusPayment("Chờ thanh toán");
 		}
-
 		roombookingrService.saveBooking(booking);
-
 		// 3. TẠO URL VNPAY
 		if ("VNPAY".equals(Booking.getPaymentMethod()) && finalPrice > 0) {
-
 			// Chuẩn bị thông tin
 			String orderInfo = "Thanh toan phong " + room.getRoomNumber();
-
 			// Gọi Service
 			String paymentUrl = roombookingrService.createVnPayUrl((long) finalPrice, orderInfo, vnp_TxnRef, req);
-
 			return "redirect:" + paymentUrl;
 		} else {
+			// TRUONG HOP DA DUNG DU DIEM DE THANH TOÁN
 			clientService.deductPoint(clientId, pointUsed);
 			currentUser.getUser().getClient().setPoint(clientId.getPoint() - pointUsed);
 			session.setAttribute("currentUser", currentUser);

@@ -27,14 +27,11 @@ public class RoomBooking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "roominfo_id")
 	private Integer roominfoId;
-
 	@Column(name = "room_id")
 	private Integer roomId;
-
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Clients clientId;
-
 	@Column(name = "type_rooms")
 	private String typeRooms;
 	@Column(name = "rooms_price")
@@ -61,9 +58,11 @@ public class RoomBooking {
 	private String vnpTxnRef;
 	@Column(name = "datePayment")
 	private LocalDate datePayment;
-	@Column(name="statusBooking")
+	@Column(name = "statusBooking")
 	private String statusBooking;
 	@Column(name = "points_used")
 	private int pointsUsed = 0;
+	@Column(name = "point_rewarded")
+	private boolean pointRewarded = false;
 
 }

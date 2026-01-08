@@ -23,7 +23,7 @@
 		<nav
 			class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm py-3">
 			<div class="container">
-				<a class="navbar-brand fw-bold text-warning text-uppercase" href="/"
+				<a class="navbar-brand fw-bold text-warning text-uppercase" href="/LandingPage"
 					style="letter-spacing: 2px;"> <i class="fa-solid fa-hotel"></i>
 					MyHotel
 				</a>

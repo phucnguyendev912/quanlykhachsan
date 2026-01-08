@@ -44,7 +44,7 @@ public class LoginController {
 				return "redirect:/LandingPage";
 			}
 		} else {
-			model.addAttribute("Error", "Sai ten dang nhap hoac mat khau");
+			model.addAttribute("Error", "Sai tên đăng nhập hoặc mật khẩu!");
 			return "login";
 		}
 
