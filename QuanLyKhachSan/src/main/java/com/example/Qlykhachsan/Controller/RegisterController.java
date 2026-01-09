@@ -23,12 +23,13 @@ public class RegisterController {
 		model.addAttribute("registerRequest", new RegisterRequest());
 		return "Register";
 	}
- 
-	@PostMapping("/register")
-	public String registerSubmit(@ModelAttribute("registerRequest") RegisterRequest request, Model model) throws UnsupportedClassVersionError, NoSuchAlgorithmException, UnsupportedEncodingException {
 
-		// Gọi Service để xử lý logic 
-		// Giả sử hàm register trả về true nếu thành công
+	@PostMapping("/register")
+	public String registerSubmit(@ModelAttribute("registerRequest") RegisterRequest request, Model model)
+			throws UnsupportedClassVersionError, NoSuchAlgorithmException, UnsupportedEncodingException {
+
+		// Gọi Service để xử lý logic
+
 		boolean isSuccess = authService.register(request);
 
 		if (isSuccess) {

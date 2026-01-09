@@ -23,8 +23,8 @@
 	<div class="container booking-container">
 		<div class="card">
 			<div class="row g-0">
-				<div
-					class="col-md-4 room-summary d-flex flex-column justify-content-center">
+				<div class="col-md-4 room-summary d-flex flex-column">
+
 					<h3 class="fw-bold mb-4">Thông tin phòng</h3>
 
 

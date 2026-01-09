@@ -25,7 +25,7 @@ public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "account_id")
-	private Integer accountId; // Sửa tên biến thành camelCase
+	private Integer accountId; 
 
 	@Column(name = "account_name", length = 50, nullable = false)
 	private String accountName;

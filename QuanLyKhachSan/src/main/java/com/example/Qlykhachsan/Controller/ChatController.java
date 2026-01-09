@@ -2,11 +2,8 @@ package com.example.Qlykhachsan.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import com.example.Qlykhachsan.Dto.ChatMessage;
-
 import com.example.Qlykhachsan.Service.chatService;
-
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {

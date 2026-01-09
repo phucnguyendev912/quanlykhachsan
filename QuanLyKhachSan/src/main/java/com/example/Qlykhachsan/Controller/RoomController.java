@@ -49,7 +49,7 @@ public class RoomController {
 		model.addAttribute("room", room);
 		List<Rooms> relatedRooms = roomService.getRelatedRooms(id);
 		model.addAttribute("relatedRooms", relatedRooms);
-		// 4. Trả về tên file JSP (Bạn nhớ đặt tên file JSP là room-detail.jsp nhé)
+		// 4. Trả về tên file JSP 
 		return "roomdetail";
 	}
 

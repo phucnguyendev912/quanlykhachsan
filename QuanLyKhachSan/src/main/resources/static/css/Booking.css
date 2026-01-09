@@ -1,56 +1,107 @@
 @charset "UTF-8";
 
+/* ===== GLOBAL ===== */
 body {
-	background-color: #f4f7f6;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .booking-container {
-	max-width: 900px;
-	margin: 50px auto;
+    max-width: 900px;
+    margin: 50px auto;
 }
 
 .card {
-	border: none;
-	border-radius: 15px;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-	overflow: hidden;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
+/* ===== ROOM SUMMARY ===== */
 .room-summary {
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	color: white;
-	padding: 40px;
+    background: linear-gradient(135deg, #6f7bf7, #7b6cf6);
+    color: #fff;
+    padding: 20px;
+    border-radius: 16px 0 0 16px;
 }
 
-.img img {
-	width: 100%; /* Đảm bảo responsive */
-	max-width: 280px;
-	/* QUAN TRỌNG: Giới hạn chiều rộng tối đa (chỉnh số này nếu muốn to/nhỏ hơn) */
-	height: 120px; /* Chiều cao cố định để ảnh đều nhau */
-	object-fit: cover; /* Cắt ảnh gọn gàng, không bị méo/bẹt */
-	display: block; /* Để căn giữa được */
-	margin: 0 auto 15px auto;
-	/* Căn giữa ảnh và tạo khoảng cách 15px bên dưới */
-	border: 2px solid #fff; /* Viền trắng mỏng cho nổi bật (tuỳ chọn) */
+/* Title */
+.room-summary h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 14px;
 }
 
+/* Image (FIXED) */
+.room-summary img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    border: 3px solid #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Room name */
+.room-summary h5 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+/* Info */
+.room-summary p {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    opacity: 0.95;
+}
+
+/* Price */
+#roomPriceDisplay {
+    background: rgba(255, 255, 255, 0.18);
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin-top: 12px;
+}
+
+#roomPriceDisplay span {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/* Divider */
+.room-summary hr {
+    border-color: rgba(255, 255, 255, 0.4);
+    margin: 16px 0;
+}
+
+/* Note */
+.room-summary .small {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* ===== PAYMENT ===== */
 .payment-method {
-	border: 2px solid #eee;
-	border-radius: 10px;
-	padding: 15px;
-	cursor: pointer;
-	transition: 0.3s;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .payment-method:hover {
-	border-color: #667eea;
-	background: #f8f9ff;
+    border-color: #667eea;
+    background: #f8f9ff;
 }
 
+/* ===== TOTAL PRICE ===== */
 .total-price-box {
-	background: #fff3f3;
-	border: 1px dashed #e74c3c;
-	border-radius: 10px;
-	padding: 20px;
+    background: #fff3f3;
+    border: 1px dashed #e74c3c;
+    border-radius: 10px;
+    padding: 20px;
 }

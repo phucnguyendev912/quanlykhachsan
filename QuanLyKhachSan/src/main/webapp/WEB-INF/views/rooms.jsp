@@ -181,7 +181,7 @@
 
 		<div class="row g-4">
 
-			<c:forEach items="${roomsToShow}" var="room">
+			<c:forEach items="${dsRooms}" var="room">
 				<div class="col-md-3 col-sm-6 d-flex align-items-stretch">
 					<div class="rooms-card w-100">
 

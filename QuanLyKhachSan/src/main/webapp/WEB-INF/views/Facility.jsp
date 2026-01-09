@@ -151,7 +151,7 @@
 									class="btn btn-outline-primary w-100 rounded-pill"
 									data-bs-toggle="modal"
 									data-bs-target="#modalService${s.facilityId}">Xem chi
-									tiết & Đặt</button>
+									tiết</button>
 							</div>
 						</div>
 					</div>

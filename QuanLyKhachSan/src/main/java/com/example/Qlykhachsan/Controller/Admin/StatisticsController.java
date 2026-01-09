@@ -25,7 +25,7 @@ public class StatisticsController {
 		List<Double> roomRevenueList = statisticsService.getRoomRevenueOnly(currentYear);
 		List<Double> facilityRevenueList = statisticsService.getFacilityRevenueOnly(currentYear);
 
-		// 2. Tính tổng (bằng cách cộng 2 list lại)
+		// 2. Tính tổng 
 		List<Double> totalRevenueList = new ArrayList<>();
 		for (int i = 0; i < 12; i++) {
 			totalRevenueList.add(roomRevenueList.get(i) + facilityRevenueList.get(i));
