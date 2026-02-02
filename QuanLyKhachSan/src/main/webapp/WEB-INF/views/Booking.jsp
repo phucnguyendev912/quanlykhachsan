@@ -128,14 +128,7 @@
 						<div class="mb-4">
 							<label class="form-label fw-bold">Phương thức thanh toán</label>
 							<div class="row g-2">
-								<div class="col-6">
-									<input type="radio" class="btn-check" name="paymentMethod"
-										id="payPal" value="PayPal" checked> <label
-										class="btn btn-outline-primary w-100 py-3 shadow-sm"
-										for="payPal"> <i
-										class="fa-brands fa-paypal fa-lg me-2"></i> PayPal
-									</label>
-								</div>
+								
 								<div class="col-6">
 									<input type="radio" class="btn-check" name="paymentMethod"
 										id="vnpay" value="VNPAY"> <label

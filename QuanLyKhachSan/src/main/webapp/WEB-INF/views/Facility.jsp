@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Danh Sách Tiện Nghi & Dịch Vụ</title>
+<title> Dịch Vụ</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -15,7 +15,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-/* CSS giữ nguyên như cũ */
+
 .text-center {
 	padding: 20px;
 }

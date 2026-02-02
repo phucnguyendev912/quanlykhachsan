@@ -14,17 +14,23 @@
 
 <style>
 body {
-	background-color: #f8f9fa;
-	font-family: 'Segoe UI', sans-serif;
+	background-color: #f4f7f6;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+.main-content {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
 .booking-wrapper {
 	max-width: 1000px;
-	margin: 50px auto;
-	background: #fff;
-	border-radius: 10px;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-	overflow: hidden; /* Bo góc cho cả khối */
+    width: 95%; /* Thêm dòng này */
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex; /* Đảm bảo các cột bên trong có chiều cao bằng nhau */
+    flex-wrap: wrap; /* Cho phép rớt dòng trên mobile */
 }
 
 /* --- CỘT TRÁI: THÔNG TIN DỊCH VỤ --- */
@@ -165,7 +171,7 @@ body {
 </style>
 </head>
 <body>
-
+<jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="booking-wrapper row g-0">
 
@@ -251,10 +257,6 @@ body {
 						<div class="payment-option active"
 							onclick="selectPayment(this, 'VNPAY')">
 							<i class="bi bi-qr-code"></i> VNPay
-						</div>
-						<div class="payment-option"
-							onclick="selectPayment(this, 'PAYPAL')">
-							<i class="bi bi-paypal"></i> PayPal
 						</div>
 						<div class="payment-option" onclick="selectPayment(this, 'COD')">
 							<i class="bi bi-cash-coin"></i> Tại Spa

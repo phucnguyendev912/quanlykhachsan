@@ -46,7 +46,6 @@ public class AdminRoomManagementController {
 		model.addAttribute("room", room);
 		model.addAttribute("activePage", "room");
 		return "AddRoom";
-
 	}
 
 	@GetMapping("/Delete/{id}")

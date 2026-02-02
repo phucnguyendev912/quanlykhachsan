@@ -1,13 +1,11 @@
 package com.example.Qlykhachsan.Service;
 
 import java.io.FileInputStream;
-
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,7 +24,6 @@ public class HotelKnowledgeService {
 				if (sheetName.contains("phòng")) {
 					result.append(readRoomSheet(sheet, formatter));
 				}
-
 				if (sheetName.contains("dịch vụ")) {
 					result.append(readServiceSheet(sheet, formatter));
 				}
@@ -37,11 +34,10 @@ public class HotelKnowledgeService {
 
 			System.out.println("loi");
 		}
-
 		return result.toString();
 	}
 
-	public String readRoomSheet(Sheet sheet, DataFormatter formatter) {
+	private String readRoomSheet(Sheet sheet, DataFormatter formatter) {
 		StringBuilder rooms = new StringBuilder("Phòng\n");
 		for (Row row : sheet) {
 			if (row.getRowNum() == 0) {
@@ -65,7 +61,7 @@ public class HotelKnowledgeService {
 		return rooms.append("\n").toString();
 	}
 
-	public String readServiceSheet(Sheet sheet, DataFormatter formatter) {
+	private String readServiceSheet(Sheet sheet, DataFormatter formatter) {
 		StringBuilder services = new StringBuilder("Dịch vụ\n");
 		for (Row row : sheet) {
 			if (row.getRowNum() == 0)

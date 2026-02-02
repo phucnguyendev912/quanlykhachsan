@@ -3,22 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Header</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
+<link href="/css/Booking.css" rel="stylesheet">
 	<header>
 		<nav
 			class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm py-3">
@@ -98,5 +83,4 @@
 		</nav>
 	</header>
 
-</body>
-</html>
+

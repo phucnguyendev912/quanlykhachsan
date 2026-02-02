@@ -11,8 +11,7 @@ import com.example.Qlykhachsan.Model.RoomBooking;
 @Repository
 public interface RoomBookingRepository extends JpaRepository<RoomBooking, Integer> {
 	RoomBooking findByVnpTxnRef(String vnpTxnRef);
-
 	// lich su dat phong
-	List<RoomBooking> findByClientId(Clients clientId);
+	List<RoomBooking> findByClientIdOrderByDateOrderDescRoominfoIdDesc(Clients clientId);
 
 }

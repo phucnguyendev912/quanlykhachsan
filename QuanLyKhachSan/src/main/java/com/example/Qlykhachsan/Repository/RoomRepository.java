@@ -14,7 +14,7 @@ import com.example.Qlykhachsan.Model.Rooms;
 @Repository
 public interface RoomRepository extends JpaRepository<Rooms, Integer> {
 	Page<Rooms> findBystatusroom(String statusroom, Pageable pageable);
-
+//lay phong trong tam gia
 	@Query(value = "SELECT TOP 4 * FROM room r " + "WHERE r.price_room BETWEEN :minPrice AND :maxPrice "
 			+ "AND r.room_id != :currentId " + "AND r.status_room = N'Trống' ", nativeQuery = true)
 	List<Rooms> findRelatedRooms(@Param("minPrice") double minPrice, @Param("maxPrice") double maxPrice,

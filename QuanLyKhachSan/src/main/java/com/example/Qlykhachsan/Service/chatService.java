@@ -31,17 +31,17 @@ public class chatService {
 				""";
 
 		HttpClient client = HttpClient.newHttpClient();
-		//
+		
 		ObjectMapper mapper = new ObjectMapper();
 
 		Map<String, Object> body = Map.of("model", "deepseek-chat", "messages",
 				List.of(Map.of("role", "system", "content", systemPrompt), Map.of("role", "user", "content", userMsg)));
-
+		
 		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(API_URL))
 				.header("Content-Type", "application/json").header("Authorization", "Bearer " + API_KEY)
-				.POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(body))).build();
+				.POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(body))).build();//convert map sang json String
 
-		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());//nhận json response dạng String
 		return mapper.readTree(response.body()).path("choices").get(0).path("message").path("content").asText();
 	}
 }

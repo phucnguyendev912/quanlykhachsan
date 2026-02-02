@@ -35,8 +35,8 @@ public class StatisticsService {
 		return result;
 	}
 
-	// Hàm phụ trợ \
-	//truyen vao 2 list sourceStats: de chua cac du lieu lay tu db gui len
+	// Hàm phụ trợ 
+	//truyen vao 2 list: sourceStats: de chua cac du lieu lay tu db gui len
 	//targetList : dung de chua 12 so 0 cua 12 thang
 	private void mergeRevenue(List<Double> targetList, List<Statistics> sourceStats) {
 		//duyet tung ban ghi duoc lay tu db len

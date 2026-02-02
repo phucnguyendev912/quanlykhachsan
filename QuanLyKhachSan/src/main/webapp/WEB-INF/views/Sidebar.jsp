@@ -49,7 +49,7 @@
 			</a></li>
 			<li class="nav-item"><a
 				class="nav-link ${activePage == 'service' ? 'active' : ''}"
-				href="accountManagement"> <i class="fas fa-receipt me-2"></i>Quản
+				href="/accountManagement"> <i class="fas fa-user-cog me-2"></i>Quản
 					lý tài khoản
 			</a></li>
 

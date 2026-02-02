@@ -11,7 +11,7 @@ public class LogoutController {
 
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
-		// 1. Lấy session hiện tại (nếu không có thì trả về null)
+		// 1. Lấy session hiện tại 
 		HttpSession session = request.getSession(false);
 
 		if (session != null) {

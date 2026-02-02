@@ -23,11 +23,11 @@ public class BookingHistoryService {
 
 	public List<BookingHistory> getBookingHistory(Clients clientId) {
 		List<BookingHistory> result = new ArrayList<BookingHistory>();
-		for (RoomBooking rb : roomBookingRepository.findByClientId(clientId)) {
+		for (RoomBooking rb : roomBookingRepository.findByClientIdOrderByDateOrderDescRoominfoIdDesc(clientId)) {
 			result.add(new BookingHistory("Room", rb.getRoominfoId(), rb.getTypeRooms(), rb.getDateOrder(),
 					rb.getDateCheckout(), null, rb.getNumberOfclient(), rb.getTotalPrice(), rb.getStatusPayment()));
 		}
-		for (FacilityBooking fb : facilityBookingRepository.findByClient(clientId)) {
+		for (FacilityBooking fb : facilityBookingRepository.findByClientOrderByBookingDateDescServiceBookingIdDesc(clientId)) {
 			result.add(
 					new BookingHistory("Facility", fb.getServiceBookingId(), fb.getFacilityName(), fb.getBookingDate(),
 							null, fb.getUsageTime(), fb.getNumberOf(), fb.getTotalPrice(), fb.getStatusPayment()));
